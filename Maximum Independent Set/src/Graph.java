@@ -40,6 +40,16 @@ public class Graph {
         }
         return neighbors;
     }
+    
+    public List<Integer> getNeighborsUpdated(int k, boolean[] visited) {
+        List<Integer> neighbors = new ArrayList<Integer>();
+        for (int i = 0; i < K; i++) {
+            if (adj[k][i] && k != i && !visited[i]) {
+                neighbors.add(i);
+            }
+        }
+        return neighbors;
+    }
 
     
     // gibt die Adjazenzmatrix in der Konsole aus
@@ -52,6 +62,68 @@ public class Graph {
         }
     }
 
+    public List<Integer> getMaximumIndependentSet() {
+        
+        List<Integer> independentSet = new ArrayList<Integer>();
+        List<Integer> degrees = new ArrayList<Integer>();
+        boolean[] visited = new boolean[K];
+        
+        // Initialize the degrees and visited arrays
+        for (int i = 0; i < K; i++) {
+            degrees.add(getNeighbors(i).size());    // the degree is the number of neighbors
+            visited[i] = false;                     // array to check if a vertex has been visited
+        }
+        
+        System.out.println("checkpoint");
+
+        // I call it the Minimal Cardinality Search
+        for (int i = 0; i < K; i++) {
+
+            // Find the vertex with the lowest degree that has not been visited
+            int minDegree = Integer.MAX_VALUE;
+            int minVertex = -1;
+            for (int j = 0; j < K; j++) {
+                int currentDegree = degrees.get(j);
+                if (!visited[j] && currentDegree < minDegree) {
+                    minDegree = currentDegree;
+                    minVertex = j;
+                }
+            }
+            
+            
+            // Add the vertex to the independent set
+            if (minVertex >= 0 && !visited[minVertex] ) {
+
+                independentSet.add(minVertex);
+                
+                // Remove the vertex and its neighbors from further consideration
+                visited[minVertex] = true;
+                for (int neighbor : getNeighbors(minVertex)) {
+                    visited[neighbor] = true;
+                }
+            }
+            
+            // update the degrees of the remaining vertices
+            for (int j = 0; j < K; j++) {
+                degrees.remove(j);
+                degrees.add(getNeighborsUpdated(j, visited).size());
+            }
+            
+        }
+        
+        // Print the maximum independent set to the console
+        System.out.print("Maximum Independent Set: { ");
+        for (int i = 0; i < independentSet.size(); i++) {
+            System.out.print(independentSet.get(i));
+            if (i != independentSet.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println(" }");
+
+        return independentSet;
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph(5);
         graph.addEdge(0, 1);
@@ -60,5 +132,6 @@ public class Graph {
         graph.addEdge(2, 3);
         graph.addEdge(2, 4);
         graph.print();
+        graph.getMaximumIndependentSet();
     }
 }

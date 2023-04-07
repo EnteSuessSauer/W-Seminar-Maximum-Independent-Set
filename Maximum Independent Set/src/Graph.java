@@ -28,6 +28,8 @@ public class Graph {
         return adj[v][w];
     }
 
+    
+    
     // bestimmt die Nachbarn eines Knotens
     public List<Integer> getNeighbors(int v) {
         List<Integer> neighbors = new ArrayList<Integer>();
@@ -40,9 +42,7 @@ public class Graph {
     }
 
     
-    /**
-     *  gibt die Adjazenzmatrix in der Konsole aus
-     */
+    // gibt die Adjazenzmatrix in der Konsole aus
     public void print() {
         for (int i = 0; i < K; i++) {
             for (int j = 0; j < K; j++) {
@@ -51,7 +51,7 @@ public class Graph {
             System.out.println();
         }
     }
-    
+
     public static void main(String[] args) {
         Graph graph = new Graph(5);
         graph.addEdge(0, 1);

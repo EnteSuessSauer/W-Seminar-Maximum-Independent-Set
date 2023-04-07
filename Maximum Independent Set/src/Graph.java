@@ -12,29 +12,29 @@ public class Graph {
     }
 
     // fügt eine Kante zur Adjazenzmatrix hinzu
-    public void addEdge(int v, int w) {
-        adj[v][w] = true;
-        adj[w][v] = true;
+    public void addEdge(int k, int l) {
+        adj[k][l] = true;
+        adj[l][k] = true;
     }
 
     // löscht eine Kante aus der Adjazenzmatrix
-    public void removeEdge(int v, int w) {
-        adj[v][w] = false;
-        adj[w][v] = false;
+    public void removeEdge(int k, int l) {
+        adj[k][l] = false;
+        adj[l][k] = false;
     }
 
     // prüft nach einer Kante zwischen zwei Knoten
-    public boolean hasEdge(int v, int w) {
-        return adj[v][w];
+    public boolean hasEdge(int k, int l) {
+        return adj[k][l];
     }
 
     
     
     // bestimmt die Nachbarn eines Knotens
-    public List<Integer> getNeighbors(int v) {
+    public List<Integer> getNeighbors(int k) {
         List<Integer> neighbors = new ArrayList<Integer>();
         for (int i = 0; i < K; i++) {
-            if (adj[v][i]) {
+            if (adj[k][i] && k != i) {
                 neighbors.add(i);
             }
         }

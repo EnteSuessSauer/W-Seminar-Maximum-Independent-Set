@@ -68,7 +68,7 @@ public class Graph {
         List<Integer> degrees = new ArrayList<Integer>();
         boolean[] visited = new boolean[K];
         
-        // Initialize the degrees and visited arrays
+        // Initialisiere degrees und visited
         for (int i = 0; i < K; i++) {
             degrees.add(getNeighbors(i).size());    // the degree is the number of neighbors
             visited[i] = false;                     // array to check if a vertex has been visited
@@ -76,10 +76,10 @@ public class Graph {
         
         System.out.println("checkpoint");
 
-        // I call it the Minimal Cardinality Search
+        // Ich nenne es the Minimal Cardinality Search algorithm
         for (int i = 0; i < K; i++) {
 
-            // Find the vertex with the lowest degree that has not been visited
+            // Such den Knoten mit dem kleinsten Grad, der noch nicht besucht wurde
             int minDegree = Integer.MAX_VALUE;
             int minVertex = -1;
             for (int j = 0; j < K; j++) {
@@ -91,19 +91,19 @@ public class Graph {
             }
             
             
-            // Add the vertex to the independent set
+            // Füge diesen Knoten zum Maximum Independet Set hinzu
             if (minVertex >= 0 && !visited[minVertex] ) {
 
                 independentSet.add(minVertex);
                 
-                // Remove the vertex and its neighbors from further consideration
+                // Lösche den Knoten und seine Nachbarn aus dem weiteren Vorgehen
                 visited[minVertex] = true;
                 for (int neighbor : getNeighbors(minVertex)) {
                     visited[neighbor] = true;
                 }
             }
             
-            // update the degrees of the remaining vertices
+            // Aktualisiere die Grade der Knoten
             for (int j = 0; j < K; j++) {
                 degrees.remove(j);
                 degrees.add(getNeighborsUpdated(j, visited).size());
@@ -111,7 +111,7 @@ public class Graph {
             
         }
         
-        // Print the maximum independent set to the console
+        // Gib das Maxmium Indepent Set in der Konsole aus
         System.out.print("Maximum Independent Set: { ");
         for (int i = 0; i < independentSet.size(); i++) {
             System.out.print(independentSet.get(i));

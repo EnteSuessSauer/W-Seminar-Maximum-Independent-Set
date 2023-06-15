@@ -1,14 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Random;
 
 public class Graph {
     private int K;   // Anzahl an Knoten
     private boolean[][] adj;   // Adjazenzmatrix
 
+    private Random random;
+
     // Konstruktor
     public Graph(int K) {
         this.K = K;
         adj = new boolean[K][K];
+        random = new Random();
     }
 
     // fügt eine Kante zur Adjazenzmatrix hinzu
@@ -60,6 +65,10 @@ public class Graph {
             }
             System.out.println();
         }
+    }
+
+    public void generateGraph(int groesse) {
+        int edges = random.nextInt((int) Math.floor(groesse / 2), groesse * ((groesse - 1) / 2)   //Anzahl der Kanten in generierten Graphen
     }
 
     public List<Integer> getMaximumIndependentSet() {

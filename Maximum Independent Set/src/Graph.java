@@ -68,7 +68,7 @@ public class Graph {
     }
 
     public void generateGraph(int groesse) {
-        int edges = random.nextInt((int) Math.floor(groesse / 2), groesse * ((groesse - 1) / 2)   //Anzahl der Kanten in generierten Graphen
+        int edges = random.nextInt((int) Math.floor(groesse / 2), groesse * ((groesse - 1) / 2));   //Anzahl der Kanten in generierten Graphen
     }
 
     public List<Integer> getMaximumIndependentSet() {

@@ -79,11 +79,10 @@ public class Graph {
         
         // Initialisiere degrees und visited
         for (int i = 0; i < K; i++) {
-            degrees.add(getNeighbors(i).size());    // the degree is the number of neighbors
-            visited[i] = false;                     // array to check if a vertex has been visited
+            degrees.add(getNeighbors(i).size());    // der Grad eines Knotens entspricht der Anzahl der Nachbarn
+            visited[i] = false;                     // Array für alle besuchten Knoten
         }
         
-        System.out.println("checkpoint");
 
         // Ich nenne es the Minimal Cardinality Search algorithm
         for (int i = 0; i < K; i++) {

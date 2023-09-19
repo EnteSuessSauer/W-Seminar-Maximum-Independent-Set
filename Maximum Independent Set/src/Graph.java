@@ -62,7 +62,7 @@ public class Graph {
         }
     }
 
-    public List<Integer> getMaximumIndependentSet() {
+    public List<Integer> greedyAlgorithm() {
         
         List<Integer> independentSet = new ArrayList<Integer>();
         List<Integer> degrees = new ArrayList<Integer>();
@@ -131,6 +131,6 @@ public class Graph {
         graph.addEdge(2, 3);
         graph.addEdge(2, 4);
         graph.print();
-        graph.getMaximumIndependentSet();
+        graph.greedyAlgorithm();
     }
 }

@@ -67,13 +67,6 @@ public class Graph {
         }
     }
 
-    
-    public void generateGraph(int groesse) {
-        int edges = random.nextInt((int) Math.floor(groesse / 2), groesse * ((groesse - 1) / 2));   //Anzahl der Kanten in generierten Graphen
-        for (int i = 0; i < edges; i++) {
-            
-        }
-    }
 
     public List<Integer> greedyAlgorithm() {
         

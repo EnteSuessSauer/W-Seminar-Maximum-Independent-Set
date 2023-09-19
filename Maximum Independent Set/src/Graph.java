@@ -87,8 +87,6 @@ public class Graph {
             visited[i] = false;                     // Array für alle besuchten Knoten
         }
         
-
-        // Ich nenne es the Minimal Cardinality Search algorithm
         for (int i = 0; i < K; i++) {
 
             // Such den Knoten mit dem kleinsten Grad, der noch nicht besucht wurde

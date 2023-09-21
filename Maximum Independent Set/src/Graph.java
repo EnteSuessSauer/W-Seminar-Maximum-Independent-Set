@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Random;
+import java.util.Set;
 
 public class Graph {
     private int K;   // Anzahl an Knoten
@@ -69,7 +69,7 @@ public class Graph {
 
     
     public void generateGraph(int groesse) {
-        int edges = random.nextInt((int) Math.floor(groesse / 2), groesse * ((groesse - 1) / 2));   //Anzahl der Kanten in generierten Graphen
+        int edges = random.nextInt(groesse * ((groesse - 1) / 2)) + (int) Math.floor(groesse / 2);   //Anzahl der Kanten in generierten Graphen
         for (int i = 0; i < edges; i++) {
             
         }
@@ -120,8 +120,33 @@ public class Graph {
             }
             
         }
+
+        return independentSet;
+    }
+
+    public List<Integer> bronKerbosch(List<Integer> R, List<Integer> P, List<Integer> X) {
         
-        // Gib das Maxmium Indepent Set in der Konsole aus
+        if (P.isEmpty() && X.isEmpty()) {
+            return P;
+        } else {
+            List<Integer> pCopy = new ArrayList<>(P);
+            for (int v : pCopy) {
+                List<Integer> vNeighbors = getNeighbors(v);
+                R.add(v);
+                P.retainAll(vNeighbors);
+                X.retainAll(vNeighbors);
+
+                bronKerbosch(R, P, X);
+
+                P.remove(v);
+                X.add(v);
+                R.remove(v);
+            }
+            return new ArrayList<>();
+        }
+    }
+
+    public void printMIS(List<Integer> independentSet) {
         System.out.print("Maximum Independent Set: { ");
         for (int i = 0; i < independentSet.size(); i++) {
             System.out.print(independentSet.get(i));
@@ -130,18 +155,24 @@ public class Graph {
             }
         }
         System.out.println(" }");
-
-        return independentSet;
     }
 
     public static void main(String[] args) {
-        Graph graph = new Graph(5);
+        int size = 5;
+        Graph graph = new Graph(size);
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(1, 3);
         graph.addEdge(2, 3);
         graph.addEdge(2, 4);
         graph.print();
-        graph.greedyAlgorithm();
+        graph.printMIS(graph.greedyAlgorithm());
+
+        List<Integer> P = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            P.add(i);
+        }
+
+        graph.printMIS(graph.bronKerbosch(new ArrayList<Integer>(), P, new ArrayList<Integer>()));
     }
 }

@@ -138,9 +138,9 @@ public class Graph {
 
                 bronKerbosch(R, P, X);
 
-                P.remove(v);
+                pCopy.remove(v);
                 X.add(v);
-                R.remove(v);
+                // R.remove(v);
             }
             return new ArrayList<>();
         }

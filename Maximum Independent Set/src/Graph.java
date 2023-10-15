@@ -70,13 +70,6 @@ public class Graph {
         }
     }
 
-    
-    public void generateGraph(int groesse) {
-        int edges = random.nextInt(groesse * ((groesse - 1) / 2)) + (int) Math.floor(groesse / 2);   //Anzahl der Kanten in generierten Graphen
-        for (int i = 0; i < edges; i++) {
-            
-        }
-    }
 
     public void printMIS(List<Integer> independentSet) {
         System.out.print("Maximum Independent Set: { ");

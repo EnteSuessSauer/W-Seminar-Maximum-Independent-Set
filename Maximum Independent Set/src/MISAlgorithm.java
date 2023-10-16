@@ -10,9 +10,9 @@ public class MISAlgorithm {
         graph.addEdge(2, 4);
         graph.print();
 
-        System.out.println("Greedy: ");
-        Greedy GreedyAlg = new Greedy(graph);
-        graph.printMIS(GreedyAlg.runAlg());
+        // System.out.println("Greedy: ");
+        // Greedy GreedyAlg = new Greedy(graph);
+        // graph.printMIS(GreedyAlg.runAlg());
 
         System.out.println("Bron-Kerbosch: ");
         BronKerbosch BKAlg = new BronKerbosch(graph);

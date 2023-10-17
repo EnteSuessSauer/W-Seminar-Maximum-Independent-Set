@@ -1,18 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Graph {
     private int K;   // Anzahl an Knoten
     private boolean[][] adj;   // Adjazenzmatrix
 
-    private Random random;
 
     // Konstruktor
     public Graph(int K) {
         this.K = K;
         adj = new boolean[K][K];
-        random = new Random();
     }
 
     // fügt eine Kante zur Adjazenzmatrix hinzu

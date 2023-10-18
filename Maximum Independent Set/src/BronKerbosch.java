@@ -18,9 +18,26 @@ public class BronKerbosch {
     }
 
     public List<List<Integer>> runAlg() {
+        graph.inverseGraph();
         System.out.println("Sarting Bron-Kerbosch-Algorithm");
-        List<List<Integer>> MIS = bronKerbosch(new ArrayList<Integer>(), V, new ArrayList<Integer>());
+        List<List<Integer>> MISCandidates = bronKerbosch(new ArrayList<Integer>(), V, new ArrayList<Integer>());
         System.out.println("Finished running");
+        graph.inverseGraph();
+
+        int maxSize = 0;
+        for (List<Integer> list : MISCandidates) {
+            if (list.size() > maxSize) {
+                maxSize = list.size();
+            }
+        }
+
+        List<List<Integer>> MIS = new ArrayList<List<Integer>>();
+        for (List<Integer> list : MISCandidates) {
+            if (list.size() == maxSize) {
+                MIS.add(list);
+            }
+        }
+
         return MIS;
     }
 
@@ -30,7 +47,7 @@ public class BronKerbosch {
         if (P.isEmpty() && X.isEmpty()) {
             System.out.println("P & X are empty");
             List<Integer> MIS = new ArrayList<>(R);
-            System.out.println("Reprted MIS: " + MIS);
+            System.out.println("Reported MIS: " + MIS);
             System.out.println("");
             MISets.add(MIS);
             return MISets;
@@ -40,14 +57,16 @@ public class BronKerbosch {
             for (int v : pCopy) {
                 System.out.println("Iterated Vertex: " + v);
                 List<Integer> vNeighbors = graph.getNeighbors(v);
-                R.add(v);
-                P.retainAll(vNeighbors);
-                X.retainAll(vNeighbors);
-                bronKerbosch(R, P, X);  
+                List<Integer> Rnew = new ArrayList<>(R);
+                Rnew.add(v);
+                List<Integer> Pnew = new ArrayList<>(P);
+                Pnew.retainAll(vNeighbors);
+                List<Integer> Xnew = new ArrayList<>(X);
+                Xnew.retainAll(vNeighbors);
+                bronKerbosch(Rnew, Pnew, Xnew);  
 
-                R.remove((Integer) v);
-                P.add((Integer) v);
-                X.add(v);
+                P.remove((Integer) v);
+                X.add((Integer) v);
                 System.out.println("Backtracking " + P + " " + X);
             }
         }

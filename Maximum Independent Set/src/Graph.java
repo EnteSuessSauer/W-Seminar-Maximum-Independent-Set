@@ -33,6 +33,23 @@ public class Graph {
         return K;
     }
 
+    public void inverseGraph() {
+        boolean[][] inversed = new boolean[K][K];
+        for (int i = 0; i < K; i++) {
+            for (int j = 0; j < K; j++) {
+                if (hasEdge(i, j) && !inversed[i][j]) {
+                    removeEdge(i, j);
+                    inversed[i][j] = true;
+                    inversed[j][i] = true;
+                } else if (!hasEdge(i, j) && !inversed[i][j]) {
+                    addEdge(i, j);
+                    inversed[i][j] = true;
+                    inversed[j][i] = true;
+                }
+            }
+        }
+    }
+
     
     
     // bestimmt die Nachbarn eines Knotens
@@ -59,6 +76,7 @@ public class Graph {
     
     // gibt die Adjazenzmatrix in der Konsole aus
     public void print() {
+        System.out.println("");
         for (int i = 0; i < K; i++) {
             for (int j = 0; j < K; j++) {
                 System.out.print(adj[i][j] ? "1 " : "0 ");  // 1 -> Kante

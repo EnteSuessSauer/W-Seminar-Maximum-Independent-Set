@@ -1,18 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Graph {
     private int K;   // Anzahl an Knoten
     private boolean[][] adj;   // Adjazenzmatrix
 
-    private Random random;
 
     // Konstruktor
     public Graph(int K) {
         this.K = K;
         adj = new boolean[K][K];
-        random = new Random();
     }
 
     // fügt eine Kante zur Adjazenzmatrix hinzu
@@ -34,6 +31,23 @@ public class Graph {
 
     public int getOrder() {
         return K;
+    }
+
+    public void inverseGraph() {
+        boolean[][] inversed = new boolean[K][K];
+        for (int i = 0; i < K; i++) {
+            for (int j = 0; j < K; j++) {
+                if (hasEdge(i, j) && !inversed[i][j]) {
+                    removeEdge(i, j);
+                    inversed[i][j] = true;
+                    inversed[j][i] = true;
+                } else if (!hasEdge(i, j) && !inversed[i][j]) {
+                    addEdge(i, j);
+                    inversed[i][j] = true;
+                    inversed[j][i] = true;
+                }
+            }
+        }
     }
 
     
@@ -62,6 +76,7 @@ public class Graph {
     
     // gibt die Adjazenzmatrix in der Konsole aus
     public void print() {
+        System.out.println("");
         for (int i = 0; i < K; i++) {
             for (int j = 0; j < K; j++) {
                 System.out.print(adj[i][j] ? "1 " : "0 ");  // 1 -> Kante

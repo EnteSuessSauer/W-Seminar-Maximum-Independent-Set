@@ -18,7 +18,7 @@ public class Greedy {
         // Initialisiere degrees und visited
         for (int i = 0; i < order; i++) {
             degrees[i] = graph.getNeighbors(i).size();    // der Grad eines Knotens entspricht der Anzahl der Nachbarn
-            visited[i] = false;                     // Array für alle besuchten Knoten
+            visited[i] = false;                           // Array für alle besuchten Knoten
         }
         
         for (int i = 0; i < order + 1; i++) {
@@ -28,7 +28,6 @@ public class Greedy {
             int minVertex = -1;
             for (int j = 0; j < order; j++) {
                 int currentDegree = degrees[j];
-                System.out.println(currentDegree);
                 if (!visited[j] && currentDegree < minDegree) {
                     minDegree = currentDegree;
                     minVertex = j;
@@ -52,9 +51,6 @@ public class Greedy {
             for (int j = 0; j < order; j++) {
                 degrees[j] = graph.getNeighborsUpdated(j, visited).size();
             }
-
-            System.out.println("");
-            
         }
 
         return independentSet;

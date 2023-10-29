@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Graph {
     private int K;   // Anzahl an Knoten
@@ -7,9 +8,37 @@ public class Graph {
 
 
     // Konstruktor
-    public Graph(int K) {
+    public Graph() {
+        K = 0;
+        adj = new boolean[K][K];
+    }
+    
+    public void initialiseGraph(int K) {
         this.K = K;
         adj = new boolean[K][K];
+    }
+
+    public void reset() {
+        K = 0;
+        adj = new boolean[K][K];
+    }
+
+    public void generate(int size) {
+        this.K = size;
+        this.adj = new boolean[K][K];
+        Random random = new Random();
+
+        // Generating random edges
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                int randomEdge = random.nextInt(2); // 0 or 1
+                if (randomEdge == 1) {
+                    addEdge(i, j);
+                } else {
+                    removeEdge(i, j);
+                }
+            }
+        }
     }
 
     // fügt eine Kante zur Adjazenzmatrix hinzu
@@ -96,4 +125,5 @@ public class Graph {
         }
         System.out.println(" }");
     }
+
 }

@@ -4,10 +4,18 @@ import java.util.List;
 public class Greedy {
     private Graph graph;
     
+    /**
+     * Erstellt ein Greedy-Objekt, setzt den Graph auf den mitgegebenen Graph 
+     * @param graph Graph
+     */
     public Greedy(Graph graph) {
         this.graph = graph;
     }
 
+    /** 
+     * Lässt den Greedy-Algorithmus auf dem Graphen laufen
+     * @return das gefundene potenziale Maximum Independent Set
+     */
     public List<Integer> runAlg() {
 
         List<Integer> independentSet = new ArrayList<Integer>();
@@ -25,24 +33,24 @@ public class Greedy {
 
             // Such den Knoten mit dem kleinsten Grad, der noch nicht besucht wurde
             int minDegree = Integer.MAX_VALUE;
-            int minVertex = -1;
+            int minDegreeVertex = -1;
             for (int j = 0; j < order; j++) {
                 int currentDegree = degrees[j];
                 if (!visited[j] && currentDegree < minDegree) {
                     minDegree = currentDegree;
-                    minVertex = j;
+                    minDegreeVertex = j;
                 }
             }
             
             
             // Füge diesen Knoten zum Maximum Independet Set hinzu
-            if (minVertex >= 0 && !visited[minVertex] ) {
+            if (minDegreeVertex >= 0 && !visited[minDegreeVertex] ) {
 
-                independentSet.add(minVertex);
+                independentSet.add(minDegreeVertex);
                 
                 // Lösche den Knoten und seine Nachbarn aus dem weiteren Vorgehen
-                visited[minVertex] = true;
-                for (int neighbor : graph.getNeighbors(minVertex)) {
+                visited[minDegreeVertex] = true;
+                for (int neighbor : graph.getNeighbors(minDegreeVertex)) {
                     visited[neighbor] = true;
                 }
             }
